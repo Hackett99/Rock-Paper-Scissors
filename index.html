@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rock Paper Scissors</title>
+</head>
+<body>
+    <script>
+        function getComputerChoice() {
+            let choices = ['rock', 'paper', 'scissors'];
+            let randomIndex = Math.floor(Math.random() * choices.length);
+            return choices[randomIndex];
+        }
+
+        function getPlayerChoice() {
+            let userChoice;
+            let validChoices = ['rock', 'paper', 'scissors'];
+            while (true) {
+                userChoice = prompt("Enter either Rock, Paper, or Scissors:");
+                userChoice = userChoice.toLowerCase();
+                if (validChoices.includes(userChoice)) {
+                    break;
+                } else {
+                    alert("Invalid choice. Please enter Rock, Paper, or Scissors.");
+                }
+            }
+            return userChoice;
+        }
+
+        function game(playerChoice, computerChoice) {
+            if (playerChoice === computerChoice) {
+                return "It's a tie!";
+            } else if (
+                (playerChoice === 'rock' && computerChoice === 'scissors') ||
+                (playerChoice === 'paper' && computerChoice === 'rock') ||
+                (playerChoice === 'scissors' && computerChoice === 'paper')
+            ) {
+                return "You win!";
+            } else {
+                return "Computer wins!";
+            }
+        }
+
+        function round() {
+            let rounds = 5;
+            let playerWins = 0;
+            let computerWins = 0;
+
+            for (let round = 1; round <= rounds; round++) {
+                let computerChoice = getComputerChoice();
+                let playerChoice = getPlayerChoice();
+
+                let result = game(playerChoice, computerChoice);
+
+                alert(`Round ${round}\n\nComputer's choice: ${computerChoice}\nPlayer's choice: ${playerChoice}\n\n${result}`);
+
+                if (result === "You win!") {
+                    playerWins++;
+                } else if (result === "Computer wins!") {
+                    computerWins++;
+                }
+            }
+
+            alert(`Game over!\n\nPlayer wins: ${playerWins}\nComputer wins: ${computerWins}`);
+        }
+        round();
+    </script>
+</body>
+</html>
